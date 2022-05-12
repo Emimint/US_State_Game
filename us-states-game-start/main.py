@@ -33,11 +33,12 @@ my_pencil.goto(0,steps)
 my_pencil.clear()
 my_pencil.write(f"Congratulations! You have guessed {len(good_guesses)} states! Here are the states you have missed:", False, align="center", font=("Courier", 22, "normal"))
 
-missed_states_list = list(set(all_states) - set(good_guesses))
+# missed_states_list = list(set(all_states) - set(good_guesses)
+# with list comprehension alternative:
+missed_states_list = [n for n in all_states if n not in good_guesses]
 
-# df_new[df_new['l_ext'].isin([31, 22, 30, 25, 64])]
-Missed_States = The_States[The_States.state.isin(missed_states_list)]
-Missed_States.to_csv('missing_states.csv')
+# create df from missed_states_list and export as .csv:
+pd.DataFrame(missed_states_list).to_csv('missing_states.csv', index= False, header= False)
 
 # print (all_states)
 # print (good_guesses)
